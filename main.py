@@ -16,10 +16,10 @@ def write_to_files(data_dict, env_file, output_file):
                 env_f.write(f"{env_key}={value}\n")
                 out_f.write(f"{key}={value}\n")
 
-def extract_simple_nested(yaml_data, main_key=None, sub_keys=None):
+def extract_simple_nested(yaml_data, main_key=None, sub_key=None):
     if main_key:
         yaml_data = yaml_data.get(main_key, {})
-    for sub_key in sub_keys:
+    if sub_key:
         yaml_data = yaml_data.get(sub_key, {})
     
     return yaml_data
@@ -53,7 +53,7 @@ def main_action():
     parser = argparse.ArgumentParser()
     parser.add_argument('--file_path', required=True, help='Path to the yaml file')
     parser.add_argument('--main_key', default=None)
-    parser.add_argument('--sub_keys', default=None)
+    parser.add_argument('--sub_key', default=None)
     parser.add_argument('--format_type', default='simple_nested')
     parser.add_argument('--primary_key', default=None)
     parser.add_argument('--primary_value', default=None)
@@ -66,7 +66,7 @@ def main_action():
     if args.format_type == "crud":
         yaml_data = extract_crud(yaml_data, args.primary_key, args.primary_value, args.top_level_keys)
     else:
-        yaml_data = extract_simple_nested(yaml_data, args.main_key, args.sub_keys)
+        yaml_data = extract_simple_nested(yaml_data, args.main_key, args.sub_key)
 
     github_env_file = os.environ.get('GITHUB_ENV')
     github_output_file = os.environ.get('GITHUB_OUTPUT')
