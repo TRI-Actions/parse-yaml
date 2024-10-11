@@ -10,7 +10,7 @@ inputs:
   main_key:
     description: "Main key for nested data (Optional)"
     required: false
-  sub_key:
+  sub_keys:
     description: "Sub key for nested data (Optional)"
     required: false
   format_type:
