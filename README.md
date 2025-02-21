@@ -1,4 +1,6 @@
 
+ NOTICE - This repo was copied from https://github.shared-services.aws.tri.global/infrastructure/parse-yaml ref: TRI-40381 
+
 # Parse YAML
 
 A custom github action to parse yaml files and return as Github Outputs to be consumed in actions.
